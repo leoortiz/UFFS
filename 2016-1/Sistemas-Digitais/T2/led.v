@@ -52,9 +52,9 @@ module test;
 	reg  [0:0] KEY; 
 	wire [0:0] LEDG;
 
-	counter c	  ( CLOCK_50,KEY, w, counter_out );
+	counter c     ( CLOCK_50,KEY, w, counter_out );
 	one_second os ( counter_out, w );
-	led l		  ( CLOCK_50, w, LEDG );
+	led l	      ( CLOCK_50, w, LEDG );
 
     always #2 CLOCK_50 = ~CLOCK_50;
 
