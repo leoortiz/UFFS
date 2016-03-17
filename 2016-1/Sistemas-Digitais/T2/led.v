@@ -1,13 +1,13 @@
 /**
  * Conta até 50.000.000, volta a 0, repete o processo
  */ 
-module counter(input clock, input reset, input w, output [25:0] out);
+module counter(input CLOCK_50, input KEY, input w, output [25:0] out);
 	reg [25:0] counter;
 	
 	assign out = counter;
 
-	always @(clock,reset) begin
-		if(reset | w) begin
+	always @(CLOCK_50,KEY) begin
+		if(KEY | w) begin
 			counter <= 0;
 		end
 		else begin
@@ -28,10 +28,10 @@ endmodule
  *	Representa o resultado final do circuito
  *		A cada um segundo muda o estado do led
  */
-module led(input clock, input w, output final_out);
+module led_control(input w, output LEDG);
 	reg state = 0;
 	
-	assign final_out = state;
+	assign LEDG = state;
 	
 	always @(posedge w) begin
 		state = ~state;
@@ -39,24 +39,37 @@ module led(input clock, input w, output final_out);
 endmodule
 
 /**
- *	Módulo de Teste
- *		Apresenta como saída o valor do contador(0 a 50 milhões) e o valor do 
- *		LED(1 segundo aceso, 1 segundo apagado).
- *
- *	@TODO Ajustar tempo
+ *	Representa o resultado final do circuito
+ *		A cada um segundo muda o estado do led na placa
  */
-module test;
+module led(CLOCK_50, KEY, LEDG);
+	wire [25:0] counter_out;
+    input CLOCK_50;
+    wire w; 
+    input  [0:0] KEY;
+    output [0:0] LEDG;
+    
+	counter c     ( CLOCK_50, KEY, w, counter_out );
+    one_second os ( counter_out, w );
+    led_control l ( w, LEDG[0] );
+endmodule
+
+
+/**
+ *	Módulo de teste
+ */
+module teste;
 	wire [25:0] counter_out;
 	reg  CLOCK_50;
 	wire w; 
 	reg  [0:0] KEY; 
 	wire [0:0] LEDG;
 
-	counter c     ( CLOCK_50,KEY, w, counter_out );
-	one_second os ( counter_out, w );
-	led l	      ( CLOCK_50, w, LEDG );
+	counter c      ( CLOCK_50, KEY, w, counter_out );
+	one_second os  ( counter_out, w );
+	led_control lc ( w, LEDG );
 
-    always #2 CLOCK_50 = ~CLOCK_50;
+	always #2 CLOCK_50 = ~CLOCK_50;
 
 	initial begin
 		$dumpvars(0, counter_out, LEDG);
@@ -65,7 +78,7 @@ module test;
 		CLOCK_50 = 0;
 
 		#2;
-		KEY = 0;		
+		KEY = 0;
 
 		#10000;
 		$finish;
