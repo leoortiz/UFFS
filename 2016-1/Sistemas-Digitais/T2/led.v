@@ -21,7 +21,7 @@ endmodule
  *		Se saída do counter for = 50 milhões, saída recebe 1, senão recebe 0.
  */ 
 module one_second(input [25:0] counter_out, output w);
-	assign w = (counter_out == 26'd50) ? 1 : 0;
+	assign w = (counter_out == 26'd50000000) ? 1 : 0;
 endmodule
 
 /**
@@ -57,6 +57,7 @@ endmodule
 
 /**
  *	Módulo de teste
+ *	obs:ajustar tempo do contador para testar
  */
 module teste;
 	wire [25:0] counter_out;
