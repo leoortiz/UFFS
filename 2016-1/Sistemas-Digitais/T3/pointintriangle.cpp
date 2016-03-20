@@ -1,3 +1,7 @@
+/**
+ * @TODO Integrar arquivos de entrada/saída
+ */
+
 #include <iostream>
 #include <string> 
 #include <cmath> // abs()
@@ -16,8 +20,6 @@ typedef struct triangulo{
 
 int sign(ponto a, ponto b, ponto c);
 int isInTriangle(ponto p, triangulo t);
-
-// TODO : Testar se ponto está ou não no triângulo
 
 int main() {
 	ponto p;
