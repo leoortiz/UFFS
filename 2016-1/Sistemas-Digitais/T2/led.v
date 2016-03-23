@@ -1,13 +1,13 @@
 /**
- * Conta até 50.000.000, volta a 0, repete o processo
+ * 	Conta até 50.000.000, volta a 0, repete o processo
  */ 
 module counter(input CLOCK_50, input KEY, input w, output [25:0] out);
 	reg [25:0] counter;
 	
 	assign out = counter;
-
-	always @(CLOCK_50,KEY) begin
-		if(KEY | w) begin
+	
+	always @(posedge CLOCK_50) begin
+		if(w | KEY) begin
 			counter <= 0;
 		end
 		else begin
@@ -48,10 +48,12 @@ module led(CLOCK_50, KEY, LEDG);
     wire w; 
     input  [0:0] KEY;
     output [0:0] LEDG;
+	 
+	assign LEDG = counter_out[25];
     
 	counter c     ( CLOCK_50, KEY, w, counter_out );
     one_second os ( counter_out, w );
-    led_control l ( w, LEDG[0] );
+    //led_control l ( w, LEDG[0] );
 endmodule
 
 
