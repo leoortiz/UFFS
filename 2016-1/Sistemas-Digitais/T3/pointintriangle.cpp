@@ -2,7 +2,6 @@
 #include <fstream>  // files
 #include <cstdlib>  // rand
 #include <ctime>    // time
-#include <cmath>    // abs()
 
 #define size 500
 
