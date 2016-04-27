@@ -11,7 +11,7 @@ module test;
 	reg [11:0] cx; reg [11:0] cy;
 	reg [11:0] px; reg [11:0] py;
 
-	isInTriangle A( px,py, ax,ay, bx,by, cx,cy, saida );
+	isInTriangle A( px,py, ax,ay, bx,by, cx,cy, out );
 
 	integer x; integer y;
 
@@ -29,7 +29,7 @@ module test;
 		if(!$feof( input_file ) ) begin
 			value = $fscanf(input_file,  "A(%d,%d), B(%d,%d), C(%d,%d), P(%d,%d)\n", ax,ay, bx,by, cx,cy, px,py);
 			#1
-			$fwrite(output_file, "A(%0d,%0d), B(%0d,%0d), C(%0d,%0d), P(%0d,%0d) \t= %0d\n", ax,ay, bx,by, cx,cy, px,py, saida);
+			$fwrite(output_file, "A(%0d,%0d), B(%0d,%0d), C(%0d,%0d), P(%0d,%0d) \t= %0d\n", ax,ay, bx,by, cx,cy, px,py, out);
 		end
 		else
 			$finish;
