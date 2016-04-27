@@ -25,8 +25,8 @@ module sign(
 
 	//
 	//                          out
-  //            m1             <            m2
-  //      t1     *     t2      <      t3     *     t4
+  	//            m1             <            m2
+	 //      t1     *     t2      <      t3     *     t4
 	// (a.x - c.x) * (b.y - c.y) < (b.x - c.x) * (a.y - c.y)
 	//
 	assign t1 = ax - cx;
