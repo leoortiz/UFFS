@@ -32,7 +32,7 @@ bool checkLines(ifstream& file_1, ifstream& file_2) {
 		cout << "OK" << endl;
 		return true;
 	} else {
-		cout << "Error";
+		cout << "Error" << endl;
 		return false;
 	}
 }
