@@ -27,7 +27,7 @@ module test;
 
 	always #2 begin
 		if(!$feof( input_file ) ) begin
-			value = $fscanf(input_file,  "A(%d,%d), B(%d,%d), C(%d,%d), P(%d,%d)\n", ax,ay, bx,by, cx,cy, px,py);
+			value = $fscanf(input_file, "A(%d,%d), B(%d,%d), C(%d,%d), P(%d,%d)\n", ax,ay, bx,by, cx,cy, px,py);
 			#1
 			$fwrite(output_file, "A(%0d,%0d), B(%0d,%0d), C(%0d,%0d), P(%0d,%0d) \t= %0d\n", ax,ay, bx,by, cx,cy, px,py, out);
 		end
