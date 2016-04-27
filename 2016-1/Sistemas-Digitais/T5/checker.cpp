@@ -48,7 +48,7 @@ bool checkValues(ifstream& file_1, ifstream& file_2) {
 
 	while( getline(file_1, sline_file_1) && getline(file_2, sline_file_2) ) {
 		if(sline_file_1 != sline_file_2) {
-			cout << "Error!" << endl;
+			cout << "Error" << endl;
 			cout << "C++ output line " << line_file_1 << " content: " << endl << sline_file_1 << endl;
 			cout << "Verilog output line " << line_file_2 << " content: " << endl << sline_file_2 << endl;
 
